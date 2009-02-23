@@ -1,0 +1,31 @@
+@charset "utf-8";
+/* CSS Document */
+
+.center{
+  text-align:center;
+}
+
+.right{
+  text-align:right;
+}
+
+td.options{
+  border-right:thick;
+  border-right-color:#006;
+  text-align:right;
+}
+
+td.separator{
+  border-bottom:thin;
+  border-bottom-color:#000;
+}
+
+body{
+  font-family:Arial, Helvetica, sans-serif;
+  font-size:10pt;
+  background-color:#FBF6F3;
+}
+
+td.copyright{
+  font-size:x-small;
+}
