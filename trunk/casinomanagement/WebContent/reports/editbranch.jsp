@@ -1,13 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link href="../styles/mainstyles.css" rel="stylesheet" type="text/css">
-<title>Editar sucursal</title>
-</head>
-<body>
+<div class="post">
+	<h1 class="title">Editar sucursal.</h1>
+	<div class="entry">
 Seleccione una regi&oacute;n en donde se buscar&aacute;n sucursales:
 <br><br>
 <form action="" method="post">
@@ -302,7 +295,6 @@ Seleccione una regi&oacute;n en donde se buscar&aacute;n sucursales:
   </tr>
 </table>
     <input name="continue" type="submit" value="Continuar">
-
-</form
-></body>
-</html>
+</form>
+</div>
+</div>

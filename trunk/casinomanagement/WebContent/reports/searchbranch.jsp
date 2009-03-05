@@ -1,13 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link href="../styles/mainstyles.css" rel="stylesheet" type="text/css">
-<title>Buscar sucursal</title>
-</head>
-<body>
+<div class="post">
+	<h1 class="title">Buscar sucursales</h1>
+	<div class="entry">
 Seleccione una regi&oacute;n en donde se buscar&aacute;n sucursales:
 <br><br>
 <form action="" method="post">
@@ -301,6 +294,6 @@ Seleccione una regi&oacute;n en donde se buscar&aacute;n sucursales:
     <td><p>Av Carlos Lazo 300 Col. Santa Fe 01329 <br>&Aacute;lvaro Obreg&oacute;n, M&eacute;xico DF, Mexico</p></td>
   </tr>
 </table>
-</form
-></body>
-</html>
+</form>
+</div>
+</div>
