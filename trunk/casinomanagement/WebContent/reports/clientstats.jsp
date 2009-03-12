@@ -1,16 +1,6 @@
-<html>
-  <head>
-    <title>Crear Reporte de Actividad de Clientes Por Sucursal</title>
-      <SCRIPT LANGUAGE="JavaScript" SRC="calendar.js"></SCRIPT>
-      <SCRIPT LANGUAGE="JavaScript">
-	var cal = new CalendarPopup("testdiv1");
-	cal.showNavigationDropdowns();
-      </SCRIPT>
-      <link href="../styles/mainstyles.css" rel="stylesheet" type="text/css">
-      <SCRIPT LANGUAGE="JavaScript">document.write(getCalendarStyles());</SCRIPT>
-  </head>
-
-  <body>
+<div class="post">
+	<div class="entry">
+	
     <h2>Actividad de Clientes Por Sucursal</h2>
     <p>Elija las siguientes opciones para generar el reporte: </p>
     <FORM NAME="opciones" action="" method="post">
@@ -37,7 +27,5 @@
 </FORM>
 
 <DIV ID="testdiv1" STYLE="position:absolute;visibility:hidden;background-color:white;layer-background-color:white;"></DIV>
-
-
-  </body>
-</html>
+</div>
+</div>
