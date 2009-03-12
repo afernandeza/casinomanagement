@@ -6,6 +6,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>RGMS - Reports</title>
+    <SCRIPT LANGUAGE="JavaScript" SRC="calendar.js"></SCRIPT>
+    <SCRIPT LANGUAGE="JavaScript">
+		var cal = new CalendarPopup("testdiv1");
+		cal.showNavigationDropdowns();
+    </SCRIPT>
+    <SCRIPT LANGUAGE="JavaScript">document.write(getCalendarStyles());</SCRIPT>
 <script type="text/javascript">
 var xmlhttp = false;
 try {
@@ -44,10 +50,8 @@ function makerequest(serverPage, objID) {
 	</div>
 	<div id="menu">
 		<ul id="main">
-			<li class="current_page_item"><a href="../index.jsp">Inicio</a></li>
-			<li><a href="../juegos.jsp">Juegos</a></li>
-			<li><a href="../contacto.jsp">Contacto</a></li>
-			<li><a href="../login.jsp">Login</a></li>
+			<li class="current_page_item"><a href="index.jsp">Sistema de administraci&oacute;n</a></li>
+			<li><a href="../login.jsp">Cerrar sesi&oacute;n</a></li>
 		</ul>
 	</div>
 </div>
@@ -62,17 +66,17 @@ function makerequest(serverPage, objID) {
 					<ul>
 						<li><a href="#" onclick="makerequest('newbranch.jsp','content'); return false;">Agregar nueva sucursal</a></li>
 						<li><a href="#" onclick="makerequest('editbranch.jsp','content'); return false;">Editar informaci&oacute;n de sucursales</a></li>
-						<li><a href="#" onclick="makerequest('deletebranch.jsp','content'); return false;"">Borrar una sucursal</a></li>
-						<li><a href="#" onclick="makerequest('searchbranch.jsp','content'); return false;"">Buscar sucursales por &aacute;rea</a></li>
+						<li><a href="#" onclick="makerequest('deletebranch.jsp','content'); return false;">Borrar una sucursal</a></li>
+						<li><a href="#" onclick="makerequest('searchbranch.jsp','content'); return false;">Buscar sucursales por &aacute;rea</a></li>
 					</ul>
 				</li>
 				<li>
 					<h2>Reportes</h2>
 					<ul>
-						<li><a href="clientstats.jsp">Actividad de clientes por sucursal</a></li>
-						<li><a href="gamesperemployee.jsp">Resultado de mesas de juego por empleado</a></li>
-						<li><a href="branchresults.jsp">Resultados a nivel sucursal</a></li>
-						<li><a href="totalresults.jsp">Resultados a nivel cadena</a></li>
+						<li><a href="#" onclick="makerequest('clientstats.jsp','content'); return false;">Actividad de clientes por sucursal</a></li>
+						<li><a href="#" onclick="makerequest('gamesperemployee.jsp','content'); return false;">Resultado de mesas de juego por empleado</a></li>
+						<li><a href="#" onclick="makerequest('branchresults.jsp','content'); return false;">Resultados a nivel sucursal</a></li>
+						<li><a href="#" onclick="makerequest('totalresults.jsp','content'); return false;">Resultados a nivel cadena</a></li>
 					</ul>
 				</li>
 				<li>

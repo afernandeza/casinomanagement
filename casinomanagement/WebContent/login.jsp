@@ -1,14 +1,30 @@
+<%@ page import = "java.sql.*;"%>
 <%
 String u = (String)request.getParameter("username");
 String p = (String)request.getParameter("password");
-if( u != null && p != null ){
-	out.println(u);
-	out.println(p);
-	response.sendRedirect("reports/index.jsp");
+if( u != null && p != null && u != "" && u != ""){
+	boolean login=false, error=false;
+	try {
+		Class.forName("org.postgresql.Driver").newInstance();
+		String url = "jdbc:postgresql://localhost:5432/casino?user=root&password=genorexfly";
+		Connection con = DriverManager.getConnection(url);
+		Statement stmt = con.createStatement();
+		ResultSet rs = stmt.executeQuery("SELECT usuario, password FROM adminuser");
+		rs.next();
+		if (rs.getString(1).equals(u) && rs.getString(2).equals(p)){
+			login=true;
+		}
+		else {
+			login = false;
+			error = true;
+		}
+	}
+	catch (Exception e){e.printStackTrace();}
+	if (login){
+		response.sendRedirect("reports/index.jsp");
+	}
 }
 %>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
     
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -42,9 +58,11 @@ if( u != null && p != null ){
 				<div class="entry">
 					<form method="post" action="">
 					<p>Usuario: <input type="text" name="username"/></p> 
-					<p>Contraseña: <input type="password" name="password"/></p>
+					<p>Contrase&ntilde;a: <input type="password" name="password"/></p>
 					<input type="submit" value="login">
 					</form>
+					<br/>
+					<% if (error){out.println("Error de usuario/contrase&&ntildea")} %>
 				</div>
 			</div>
 		</div>
