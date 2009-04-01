@@ -12,38 +12,9 @@
 		cal.showNavigationDropdowns();
     </SCRIPT>
     <SCRIPT LANGUAGE="JavaScript">document.write(getCalendarStyles());</SCRIPT>
-<script type="text/javascript">
-var xmlhttp = false;
-try {
-	xmlhttp = new ActiveXObject("Msxml2.XMLHTTP");
-	} catch (e) {
-	try {
-		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-		} catch (E) {
-		xmlhttp = false;
-		}
-}
-
-if (!xmlhttp && typeof XMLHttpRequest != 'undefined') {
-		xmlhttp = new XMLHttpRequest();
-}
-
-
-function makerequest(serverPage, objID) {
-	var obj = document.getElementById(objID);
-	xmlhttp.open("GET", serverPage);
-	xmlhttp.onreadystatechange = function() {
-		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-			obj.innerHTML = xmlhttp.responseText;
-		}
-	}
-	xmlhttp.send(null);
-}
-//-->
-</script>
 <link href="../styles/mainstyles.css" rel="stylesheet" type="text/css" media="screen" />
 </head>
-<body onload="makerequest ('inicio.html','content')">>
+<body>
 <!-- start header -->
 <div id="header">
 	<div id="logo">
@@ -64,19 +35,19 @@ function makerequest(serverPage, objID) {
 				<li>
 					<h2>Administraci&oacute;n</h2>
 					<ul>
-						<li><a href="#" onclick="makerequest('newbranch.jsp','content'); return false;">Agregar nueva sucursal</a></li>
-						<li><a href="#" onclick="makerequest('editbranch.jsp','content'); return false;">Editar informaci&oacute;n de sucursales</a></li>
-						<li><a href="#" onclick="makerequest('deletebranch.jsp','content'); return false;">Borrar una sucursal</a></li>
-						<li><a href="#" onclick="makerequest('searchbranch.jsp','content'); return false;">Buscar sucursales por &aacute;rea</a></li>
+						<li><a href="newbranch.jsp">Agregar nueva sucursal</a></li>
+						<li><a href="editbranch.jsp">Editar informaci&oacute;n de sucursales</a></li>
+						<li><a href="deletebranch.jsp">Borrar una sucursal</a></li>
+						<li><a href="searchbranch.jsp">Buscar sucursales por &aacute;rea</a></li>
 					</ul>
 				</li>
 				<li>
 					<h2>Reportes</h2>
 					<ul>
-						<li><a href="#" onclick="makerequest('clientstats.jsp','content'); return false;">Actividad de clientes por sucursal</a></li>
-						<li><a href="#" onclick="makerequest('gamesperemployee.jsp','content'); return false;">Resultado de mesas de juego por empleado</a></li>
-						<li><a href="#" onclick="makerequest('branchresults.jsp','content'); return false;">Resultados a nivel sucursal</a></li>
-						<li><a href="#" onclick="makerequest('totalresults.jsp','content'); return false;">Resultados a nivel cadena</a></li>
+						<li><a href="clientstats.jsp">Actividad de clientes por sucursal</a></li>
+						<li><a href="gamesperemployee.jsp">Resultado de mesas de juego por empleado</a></li>
+						<li><a href="branchresults.jsp">Resultados a nivel sucursal</a></li>
+						<li><a href="totalresults.jsp">Resultados a nivel cadena</a></li>
 					</ul>
 				</li>
 				<li>
@@ -88,7 +59,12 @@ function makerequest(serverPage, objID) {
 		</div>
 		<!-- start content -->
 		<div id="content">
-			
+			<div class="post">
+				<h1 class="title">Sitio de administraci&oacute;n</h1>
+				<div class="entry">
+					<p>Elija una opci&oacute;n del menu izquierdo.</p>
+				</div>
+			</div>
 		</div>
 		<!-- end content -->
 				<div style="clear: both;">&nbsp;</div>
