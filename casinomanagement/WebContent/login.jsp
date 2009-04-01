@@ -1,12 +1,13 @@
 <%@ page import = "java.sql.*;"%>
 <%
+boolean error=false;
 String u = (String)request.getParameter("username");
 String p = (String)request.getParameter("password");
 if( u != null && p != null && u != "" && u != ""){
-	boolean login=false, error=false;
+	boolean login=false;
 	try {
 		Class.forName("org.postgresql.Driver").newInstance();
-		String url = "jdbc:postgresql://localhost:5432/casino?user=root&password=genorexfly";
+		String url = "jdbc:postgresql://localhost:5432/casino?user=postgres&password=";
 		Connection con = DriverManager.getConnection(url);
 		Statement stmt = con.createStatement();
 		ResultSet rs = stmt.executeQuery("SELECT usuario, password FROM adminuser");
@@ -62,7 +63,7 @@ if( u != null && p != null && u != "" && u != ""){
 					<input type="submit" value="login">
 					</form>
 					<br/>
-					<% if (error){out.println("Error de usuario/contrase&&ntildea")} %>
+					<% if (error){out.println("Error de usuario/contrase&&ntildea");} %>
 				</div>
 			</div>
 		</div>
