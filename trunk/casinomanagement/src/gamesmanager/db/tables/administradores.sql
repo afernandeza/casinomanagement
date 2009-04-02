@@ -15,4 +15,4 @@ CREATE TABLE administradores
       ON UPDATE NO ACTION ON DELETE CASCADE
 )
 WITH (OIDS=FALSE);
-ALTER TABLE administradores OWNER TO casindesktopapp;
+ALTER TABLE administradores OWNER TO casinomngmtapp;

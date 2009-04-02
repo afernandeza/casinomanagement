@@ -10,4 +10,4 @@ CREATE TABLE adminuser
   CONSTRAINT adminuser_pkey PRIMARY KEY (usuarioid)
 )
 WITH (OIDS=FALSE);
-ALTER TABLE adminuser OWNER TO casindesktopapp;
+ALTER TABLE adminuser OWNER TO casinomngmtapp;
