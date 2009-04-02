@@ -1,6 +1,18 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-    
+<%
+session = request.getSession(false);
+if (session==null){
+	response.sendRedirect("../login.jsp");
+}
+String auth= (String)session.getAttribute("authenticated");
+if (auth==null){
+	response.sendRedirect("../login.jsp");
+}
+else{
+	if (!auth.equals("true")){
+		response.sendRedirect("../login.jsp");
+	}
+}
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -22,7 +34,7 @@
 	<div id="menu">
 		<ul id="main">
 			<li class="current_page_item"><a href="index.jsp">Sistema de administraci&oacute;n</a></li>
-			<li><a href="../login.jsp">Cerrar sesi&oacute;n</a></li>
+			<li><a href="logout.jsp">Cerrar sesi&oacute;n</a></li>
 		</ul>
 	</div>
 </div>
@@ -53,7 +65,7 @@
 				<li>
 					<h2>Opciones de usuario</h2>
 					<ul>
-						<li><a href="../login.jsp">Cerrar Sesi&oacute;n</a></li>
+						<li><a href="logout.jsp">Cerrar Sesi&oacute;n</a></li>
 					</ul>
 				</li>
 		</div>

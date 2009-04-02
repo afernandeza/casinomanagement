@@ -11,8 +11,8 @@ declare
 begin
   select into adminid adminidgenerator from adminidgenerator();
   select into userid usidauto from nextval('adminuserid') as usidauto;
-  insert into administradores values(nombres, appaterno, apmaterno, userid, adminid);
   insert into adminuser values(userid, usuario, md5(passwd));
+  insert into administradores values(nombres, appaterno, apmaterno, userid, adminid);
   return true;
 end;
 $BODY$
