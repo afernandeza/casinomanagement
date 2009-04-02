@@ -1,29 +1,49 @@
 <%@ page import = "java.sql.*;"%>
 <%
+session = request.getSession(false);
+if (session!=null){
+	String auth= (String)session.getAttribute("authenticated");
+	if (auth!=null){
+		if (auth.equals("true")){
+			response.sendRedirect("reports/index.jsp");
+		}
+	}
+}
+
 boolean error=false;
 String u = (String)request.getParameter("username");
 String p = (String)request.getParameter("password");
 if( u != null && p != null && u != "" && u != ""){
 	boolean login=false;
+	CallableStatement cs=null;
+	Connection con=null;
 	try {
 		Class.forName("org.postgresql.Driver").newInstance();
 		String url = "jdbc:postgresql://localhost:5432/casino?user=postgres&password=";
-		Connection con = DriverManager.getConnection(url);
-		Statement stmt = con.createStatement();
-		ResultSet rs = stmt.executeQuery("SELECT usuario, password FROM adminuser");
-		rs.next();
-		if (rs.getString(1).equals(u) && rs.getString(2).equals(p)){
-			login=true;
-		}
-		else {
-			login = false;
-			error = true;
-		}
+		con = DriverManager.getConnection(url);
+		
+		String AUTH = "{ ? = call authenticate( ?, ? ) }";
+		cs = con.prepareCall(AUTH);
+        cs.registerOutParameter(1, Types.BOOLEAN);
+        cs.setString(2, u);
+        cs.setString(3, p);
+
+        cs.execute();
+        login = cs.getBoolean(1);
+        if(!login){error=true;}
 	}
 	catch (Exception e){e.printStackTrace();}
-	if (login){
-		response.sendRedirect("reports/index.jsp");
+	finally{
+		if (cs!=null){cs.close();}
+		if (con!=null){con.close();}
 	}
+	if (login){
+        error=false;
+        session = request.getSession();
+        session.setAttribute("user", u);
+        session.setAttribute("authenticated", "true");
+        response.sendRedirect("reports/index.jsp");
+    }
 }
 %>
     
@@ -63,7 +83,7 @@ if( u != null && p != null && u != "" && u != ""){
 					<input type="submit" value="login">
 					</form>
 					<br/>
-					<% if (error){out.println("Error de usuario/contrase&&ntildea");} %>
+					<% if (error){out.println("<div class=\"error\">Error de usuario/contrase&ntilde;a</div>");} %>
 				</div>
 			</div>
 		</div>

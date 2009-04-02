@@ -185,6 +185,12 @@ img.right {
 	font-weight: normal;
 }
 
+.error {
+	font-size: 14px;
+	font-weight: bold;
+	color: #8C0209;
+}
+
 .title {
 	margin: 0;
 	padding: 10px 0 4px 20px;
