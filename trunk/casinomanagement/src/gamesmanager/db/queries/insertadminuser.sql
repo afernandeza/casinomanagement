@@ -1,0 +1,1 @@
+SELECT insertadmin('admin', 'admin', 'admin', 'admin', 'admin');

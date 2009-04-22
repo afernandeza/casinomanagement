@@ -74,15 +74,11 @@ else{
 			<div class="post">
 				<h1 class="title">Nueva sucursal</h1>
 				<div class="entry">
-					<form action="" method="post">
+					<form action="newbranchprocess.jsp" method="post">
 					<table border="0">
 					  <tr>
 					    <td>Nombre de sucursal:</td>
 					    <td><input type="text" name="branchname" id="branchname"></td>
-					  </tr>
-					  <tr>
-					    <td> Conexi&oacute;n base de datos:</td>
-					    <td><input type="text" name="databaseurl" id="databaseurl"></td>
 					  </tr>
 					  <tr>
 					    <td>Calle y n&uacute;mero:</td>
@@ -98,7 +94,7 @@ else{
 					  </tr>
 					    <tr>
 					    <td>C&oacute;digo postal:</td>
-					    <td><input type="text" name="municipio" id="municipio"></td>
+					    <td><input type="text" name="CP" id="CP"></td>
 					  </tr>
 					  <tr>
 					    <td>Municipio o delegaci&oacute;n:</td>
