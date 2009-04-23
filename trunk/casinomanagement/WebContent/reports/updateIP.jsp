@@ -14,14 +14,8 @@ else{
 	}
 }
 
-String name = (String)request.getParameter("branchname");
-String street = (String)request.getParameter("street");
-String numint = (String)request.getParameter("numint");
-String colonia = (String)request.getParameter("colonia");
-String CP = (String)request.getParameter("CP");
-String municipio = (String)request.getParameter("municipio");
-String estado = (String)request.getParameter("estado");
-String pais = (String)request.getParameter("country");
+String ip = (String)request.getParameter("ip");
+
 
 boolean error = false;
 int id=-1;
@@ -32,14 +26,7 @@ finally { if (error){response.sendRedirect("error.jsp");} }
 
 
 if (id==-1){error=true;}
-if (name==null || name.equals("")){error=true;}
-if (street==null || street.equals("")){error=true;}
-if (numint==null || numint.equals("")){error=true;}
-if (colonia==null || colonia.equals("")){error=true;}
-if (CP==null || CP.equals("")){error=true;}
-if (municipio==null || municipio.equals("")){error=true;}
-if (estado==null || estado.equals("")){error=true;}
-if (pais==null || pais.equals("")){error=true;}
+if (ip==null || ip.equals("")){error=true;}
 
 if (!error){
 	CallableStatement cs=null;
@@ -50,18 +37,11 @@ if (!error){
 		String url = "jdbc:postgresql://localhost:5432/casino?user=postgres&password=";
 		con = DriverManager.getConnection(url);
 		
-		String INSERT = "{? = call updateBranch(?, ?, ?, ?, ?, ?, ?, ?,?)}";
+		String INSERT = "{? = call updateIP(?, ?)}";
 		cs = con.prepareCall(INSERT);
 	    cs.registerOutParameter(1, Types.BOOLEAN);
 	    cs.setInt(2, id);
-	    cs.setString(3, name);
-	    cs.setString(4, street);
-	    cs.setString(5, numint);
-	    cs.setString(6, colonia);
-	    cs.setString(7, municipio);
-	    cs.setString(8, CP);
-	    cs.setString(9, estado);
-	    cs.setString(10, pais);
+	    cs.setString(3, ip);
 	    cs.execute();
 	    success = cs.getBoolean(1);
 	}

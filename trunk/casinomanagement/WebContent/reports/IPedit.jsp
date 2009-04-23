@@ -13,6 +13,9 @@ else{
 		response.sendRedirect("../login.jsp");
 	}
 }
+
+int id = Integer.parseInt((String)request.getParameter("sucursales"));
+
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -20,6 +23,11 @@ else{
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>RGMS - Reports</title>
     <SCRIPT LANGUAGE="JavaScript" SRC="calendar.js"></SCRIPT>
+    <SCRIPT LANGUAGE="JavaScript">
+		var cal = new CalendarPopup("testdiv1");
+		cal.showNavigationDropdowns();
+    </SCRIPT>
+    <SCRIPT LANGUAGE="JavaScript">document.write(getCalendarStyles());</SCRIPT>
 <link href="../styles/mainstyles.css" rel="stylesheet" type="text/css" media="screen" />
 </head>
 <body>
@@ -71,25 +79,17 @@ else{
 		<!-- start content -->
 		<div id="content">
 			<div class="post">
-				<h1 class="title">B&uacute;squeda de sucursal.</h1>
+				<h1 class="title">Editar IP</h1>
 				<div class="entry">
-					Resultado de la b&uacute;squeda.
-					<br><br>
+					<form action="IPedit2.jsp" method="post">
 					<table border="1">
 					  <tr>
-					    <td><b>Sucursal</b></td>
-					    <td><b>Direcci&oacute;n</b></td>
+					    <td>&nbsp;</td>
+					    <td><b>#ip</b></td>
+					    <td><b>Direcci&oacute;n IP</b></td>
 					  </tr>
 					  <%
-					  String country = request.getParameter("country");
-					  String state = request.getParameter("state");
-					  String town = request.getParameter("town");
-					  String suburb = request.getParameter("suburb");
-					  if (country==null){country="";}
-					  if (state==null){state="";}
-					  if (town==null){town="";}
-					  if (suburb==null){suburb="";}
-					  String Query = "select * FROM searchBranch(?, ?, ?, ?)";
+					  String Query = "select * FROM getIP(?)";
 					  PreparedStatement pstmt = null;
 						Connection con=null;
 						ResultSet rs = null;
@@ -99,15 +99,14 @@ else{
 							String url = "jdbc:postgresql://localhost:5432/casino?user=postgres&password=";
 							con = DriverManager.getConnection(url);
 							pstmt = con.prepareCall(Query);
-					        pstmt.setString(1, "%"+country+"%");
-					        pstmt.setString(2, "%"+state+"%");
-					        pstmt.setString(3, "%"+town+"%");
-					        pstmt.setString(4, "%"+suburb+"%");
+					        pstmt.setInt(1, id);
 					        rs = pstmt.executeQuery();
+					        cont=1;
 					        while (rs.next()){
-					        	out.println("<tr><td>"+rs.getString("nombre")+"</td>");
-					        	out.println("<td>"+rs.getString("callenum")+" "+rs.getString("colonia")+" "+rs.getString("codigopostal")+
-					        				"<br>"+rs.getString("municipio")+", "+rs.getString("estado")+", "+rs.getString("pais")+"</td></tr>");
+					        	out.println("<tr><td> <input type=\"radio\" name=\"selected\" value=\""+rs.getInt("IPid")+"\"></td>");
+					        	out.println("<td>"+cont+"</td>");
+					        	out.println("<td>"+rs.getString("ip")+"</td></tr>");
+					        	cont++;
 					        }
 						}
 						catch (Exception e){e.printStackTrace();}
@@ -118,6 +117,10 @@ else{
 						}
 						%>
 					</table>
+					<input type="hidden" name="id" value="<%out.print(id);%>"/>
+					<br>
+					<input type="submit" name="submit" value="Continuar">
+					</form>
 				</div>
 			</div>
 			</div>
@@ -131,4 +134,3 @@ else{
 </div>
 </body>
 </html>
-			

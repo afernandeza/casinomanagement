@@ -23,36 +23,51 @@ String municipio = (String)request.getParameter("municipio");
 String estado = (String)request.getParameter("estado");
 String pais = (String)request.getParameter("country");
 
-CallableStatement cs=null;
-Connection con=null;
-boolean success=false;
-try {
-	Class.forName("org.postgresql.Driver").newInstance();
-	String url = "jdbc:postgresql://localhost:5432/casino?user=postgres&password=";
-	con = DriverManager.getConnection(url);
-	
-	String INSERT = "{? = call insertbranch(?, ?, ?, ?, ?, ?, ?,?)}";
-	cs = con.prepareCall(INSERT);
-    cs.registerOutParameter(1, Types.BOOLEAN);
-    cs.setString(2, name);
-    cs.setString(3, street);
-    cs.setString(4, numint);
-    cs.setString(5, colonia);
-    cs.setString(6, municipio);
-    cs.setString(7, CP);
-    cs.setString(8, estado);
-    cs.setString(9, pais);
-    cs.execute();
-    success = cs.getBoolean(1);
-}
-catch (Exception e){e.printStackTrace();}
-finally{
-	if (cs!=null){cs.close();}
-	if (con!=null){con.close();}
-	if(!success){response.sendRedirect("error.jsp");}
-}
-if (success){
-	response.sendRedirect("success.jsp");
-}
+boolean error = false;
+if (name==null || name.equals("")){error = true;}
+if (street==null || street.equals("")){error = true;}
+if (numint==null || numint.equals("")){error = true;}
+if (colonia==null || colonia.equals("")){error = true;}
+if (CP==null || CP.equals("")){error = true;}
+if (municipio==null || municipio.equals("")){error = true;}
+if (estado==null || estado.equals("")){error = true;}
+if (pais==null || pais.equals("")){error = true;}
 
+
+if (!error){
+	CallableStatement cs=null;
+	Connection con=null;
+	boolean success=false;
+	try {
+		Class.forName("org.postgresql.Driver").newInstance();
+		String url = "jdbc:postgresql://localhost:5432/casino?user=postgres&password=";
+		con = DriverManager.getConnection(url);
+		
+		String INSERT = "{? = call insertbranch(?, ?, ?, ?, ?, ?, ?,?)}";
+		cs = con.prepareCall(INSERT);
+	    cs.registerOutParameter(1, Types.BOOLEAN);
+	    cs.setString(2, name);
+	    cs.setString(3, street);
+	    cs.setString(4, numint);
+	    cs.setString(5, colonia);
+	    cs.setString(6, municipio);
+	    cs.setString(7, CP);
+	    cs.setString(8, estado);
+	    cs.setString(9, pais);
+	    cs.execute();
+	    success = cs.getBoolean(1);
+	}
+	catch (Exception e){e.printStackTrace();}
+	finally{
+		if (cs!=null){cs.close();}
+		if (con!=null){con.close();}
+		if(!success){response.sendRedirect("error.jsp");}
+	}
+	if (success){
+		response.sendRedirect("success.jsp");
+	}
+}
+else {
+	response.sendRedirect("error.jsp");
+}
 %>

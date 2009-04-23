@@ -1,3 +1,4 @@
+<%@ page import = "java.sql.*;"%>
 <%
 session = request.getSession(false);
 if (session==null){
@@ -12,6 +13,11 @@ else{
 		response.sendRedirect("../login.jsp");
 	}
 }
+
+String query=null;
+Connection con=null;
+ResultSet rs=null;
+String url=null;
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -51,6 +57,9 @@ else{
 						<li><a href="editbranch.jsp">Editar informaci&oacute;n de sucursales</a></li>
 						<li><a href="deletebranch.jsp">Borrar una sucursal</a></li>
 						<li><a href="searchbranch.jsp">Buscar sucursales por &aacute;rea</a></li>
+						<li><a href="addIP.jsp">Agregar direccion IP</a></li>
+						<li><a href="editIP.jsp">Editar direccion IP</a></li>
+						<li><a href="deleteIP.jsp">Borrar direccion IP</a></li>
 					</ul>
 				</li>
 				<li>
@@ -78,11 +87,28 @@ else{
 				    <FORM NAME="opciones" action="" method="post">
 				      <p>Elegir Sucursal: 
 				      <select name="sucursales">
-				
-					<option value="1">Sucursal 1</option>
-					<option value="2">Sucursal 2</option>
-					<option value="3">Sucursal 3</option>
-					<option value="4">Sucursal 4</option>
+						<%
+					      	query="SELECT * FROM sucursales;";
+							con=null;
+							rs=null;
+							try {
+								Class.forName("org.postgresql.Driver").newInstance();
+								url = "jdbc:postgresql://localhost:5432/casino?user=postgres&password=";
+								con = DriverManager.getConnection(url);
+								rs=  con.createStatement().executeQuery(query);
+								String id,nombre;
+								while (rs.next()){
+									id = rs.getString("sucursalid");
+									nombre = rs.getString("nombre");
+									out.println("<option value=\""+id+"\">"+nombre+"</option>");
+								}
+							}
+							catch (Exception e){e.printStackTrace();}
+							finally{
+								if (rs!=null){rs.close();}
+								if (con!=null){con.close();}
+							}
+						  %>
 				      </select>
 				      </p>
 				      <p> Fecha de inicio para el reporte: 
