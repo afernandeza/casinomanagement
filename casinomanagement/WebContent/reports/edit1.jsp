@@ -47,6 +47,9 @@ else{
 						<li><a href="editbranch.jsp">Editar informaci&oacute;n de sucursales</a></li>
 						<li><a href="deletebranch.jsp">Borrar una sucursal</a></li>
 						<li><a href="searchbranch.jsp">Buscar sucursales por &aacute;rea</a></li>
+						<li><a href="addIP.jsp">Agregar direccion IP</a></li>
+						<li><a href="editIP.jsp">Editar direccion IP</a></li>
+						<li><a href="deleteIP.jsp">Borrar direccion IP</a></li>
 					</ul>
 				</li>
 				<li>
@@ -107,7 +110,7 @@ else{
 					        	out.println("<tr><td> <input type=\"radio\" name=\"selected\" value=\""+rs.getInt("sucursalid")+"\"></td>");
 					        	out.println("<td>"+rs.getString("nombre")+"</td>");
 					        	out.println("<td>"+rs.getString("callenum")+" "+rs.getString("colonia")+" "+rs.getString("codigopostal")+
-					        				"<br>"+rs.getString("municipio")+", "+rs.getString("estado")+", "+rs.getString("pais")+"</td>");
+					        				"<br>"+rs.getString("municipio")+", "+rs.getString("estado")+", "+rs.getString("pais")+"</td></tr>");
 					        }
 						}
 						catch (Exception e){e.printStackTrace();}

@@ -66,6 +66,9 @@ String url=null;
 						<li><a href="editbranch.jsp">Editar informaci&oacute;n de sucursales</a></li>
 						<li><a href="deletebranch.jsp">Borrar una sucursal</a></li>
 						<li><a href="searchbranch.jsp">Buscar sucursales por &aacute;rea</a></li>
+						<li><a href="addIP.jsp">Agregar direccion IP</a></li>
+						<li><a href="editIP.jsp">Editar direccion IP</a></li>
+						<li><a href="deleteIP.jsp">Borrar direccion IP</a></li>
 					</ul>
 				</li>
 				<li>
