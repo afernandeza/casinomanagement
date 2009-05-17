@@ -78,7 +78,7 @@ else{
 				<div class="entry">
 				    <h2>Resultados a Nivel Cadena</h2>
 				    <p>Elija las siguientes opciones para generar el reporte: </p>
-				    <FORM NAME="opciones" action="" method="post">
+				    <FORM NAME="opciones" action="clientStatsREPORT.jsp" method="post">
 				      <p> Fecha de inicio para el reporte: 
 				      <INPUT TYPE="text" NAME="date1" VALUE="" SIZE=25 readonly="readonly"></INPUT>
 				
