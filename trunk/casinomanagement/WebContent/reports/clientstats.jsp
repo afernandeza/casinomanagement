@@ -84,7 +84,7 @@ String url=null;
 				<div class="entry">
 					<h2>Actividad de Clientes Por Sucursal</h2>
 				    <p>Elija las siguientes opciones para generar el reporte: </p>
-				    <FORM NAME="opciones" action="" method="post">
+				    <FORM NAME="opciones" action="clientStatsREPORT.jsp" method="post">
 				      <p>Elegir Sucursal: 
 				      <select name="sucursales">
 						<%

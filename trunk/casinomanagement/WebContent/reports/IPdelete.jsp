@@ -14,10 +14,8 @@ else{
 	}
 }
 
-String query=null;
-Connection con=null;
-ResultSet rs=null;
-String url=null;
+int id = Integer.parseInt((String)request.getParameter("sucursales"));
+
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -81,43 +79,51 @@ String url=null;
 		<!-- start content -->
 		<div id="content">
 			<div class="post">
+				<h1 class="title">Editar IP</h1>
 				<div class="entry">
-					<h2>Borrar direccion IP de una sucursal</h2>
-				    <p>Elija una sucursal: </p>
-				    <FORM NAME="opciones" action="IPdelete.jsp" method="post">
-				      <p>Elegir Sucursal: 
-				      <select name="sucursales">
-						<%
-					      	query="SELECT * FROM sucursales;";
-							con=null;
-							rs=null;
-							try {
-								Class.forName("org.postgresql.Driver").newInstance();
-								url = "jdbc:postgresql://localhost:5432/casino?user=postgres&password=";
-								con = DriverManager.getConnection(url);
-								rs=  con.createStatement().executeQuery(query);
-								String id,nombre;
-								while (rs.next()){
-									id = rs.getString("sucursalid");
-									nombre = rs.getString("nombre");
-									out.println("<option value=\""+id+"\">"+nombre+"</option>");
-								}
-							}
-							catch (Exception e){e.printStackTrace();}
-							finally{
-								if (rs!=null){rs.close();}
-								if (con!=null){con.close();}
-							}
-						  %>
-				      </select>
-				      </p>
-				      <input type="submit" name="submit" value="Continuar"></input>
-					</FORM>
-				
-					<DIV ID="testdiv1" STYLE="position:absolute;visibility:hidden;background-color:white;layer-background-color:white;"></DIV>
+					<form action="IPdeleteDB.jsp" method="post">
+					<table border="1">
+					  <tr>
+					    <td>&nbsp;</td>
+					    <td><b>#ip</b></td>
+					    <td><b>Direcci&oacute;n IP</b></td>
+					  </tr>
+					  <%
+					  String Query = "select * FROM getIP(?)";
+					  PreparedStatement pstmt = null;
+						Connection con=null;
+						ResultSet rs = null;
+						int cont=0;
+						try {
+							Class.forName("org.postgresql.Driver").newInstance();
+							String url = "jdbc:postgresql://localhost:5432/casino?user=postgres&password=";
+							con = DriverManager.getConnection(url);
+							pstmt = con.prepareCall(Query);
+					        pstmt.setInt(1, id);
+					        rs = pstmt.executeQuery();
+					        cont=1;
+					        while (rs.next()){
+					        	out.println("<tr><td> <input type=\"radio\" name=\"selected\" value=\""+rs.getInt("IPid")+"\"></td>");
+					        	out.println("<td>"+cont+"</td>");
+					        	out.println("<td>"+rs.getString("ip")+"</td></tr>");
+					        	cont++;
+					        }
+						}
+						catch (Exception e){e.printStackTrace();}
+						finally{
+							if (pstmt!=null){pstmt.close();}
+							if (con!=null){con.close();}
+							if (rs!=null){rs.close();}
+						}
+						%>
+					</table>
+					<input type="hidden" name="id" value="<%out.print(id);%>"/>
+					<br>
+					<input type="submit" name="submit" value="Continuar">
+					</form>
 				</div>
 			</div>
-		</div>
+			</div>
 		<!-- end content -->
 				<div style="clear: both;">&nbsp;</div>
 	</div>
