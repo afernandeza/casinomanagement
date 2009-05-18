@@ -1,8 +1,8 @@
--- Function: insertIP(integer, character varying)
+-- Function: insertIP(character varying, character varying)
 
--- DROP FUNCTION insertIP(integer, character varying);
+-- DROP FUNCTION insertIP(character varying, character varying);
 
-CREATE OR REPLACE FUNCTION insertIP(sid integer, ip_addr character varying)
+CREATE OR REPLACE FUNCTION insertIP(sid character varying, ip_addr character varying)
   RETURNS boolean AS
 $BODY$
 declare
@@ -15,4 +15,4 @@ end;
 $BODY$
   LANGUAGE 'plpgsql' VOLATILE
   COST 100;
-ALTER FUNCTION insertIP(integer, character varying) OWNER TO casinomngmtapp;
+ALTER FUNCTION insertIP(character varying, character varying) OWNER TO casinomngmtapp;

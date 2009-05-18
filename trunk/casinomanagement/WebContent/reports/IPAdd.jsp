@@ -14,7 +14,7 @@ else{
 	}
 }
 
-int id = Integer.parseInt((String)request.getParameter("sucursales"));
+String id = (String)request.getParameter("sucursales");
 
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">

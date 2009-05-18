@@ -1,8 +1,8 @@
--- Function: getIP(integer)
+-- Function: getIP(character varying)
 
--- DROP FUNCTION getIP(integer);
+-- DROP FUNCTION getIP(character varying);
 
-CREATE OR REPLACE FUNCTION getIP(sid integer)
+CREATE OR REPLACE FUNCTION getIP(sid character varying)
   RETURNS SETOF ipAddr AS
 $BODY$
   SELECT * 
@@ -11,4 +11,4 @@ $BODY$
 $BODY$
   LANGUAGE 'sql' VOLATILE
   COST 100;
-ALTER FUNCTION getIP(integer) OWNER TO casinomngmtapp;
+ALTER FUNCTION getIP(character varying) OWNER TO casinomngmtapp;

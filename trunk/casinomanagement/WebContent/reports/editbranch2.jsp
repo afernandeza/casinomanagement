@@ -14,7 +14,7 @@ else{
 	}
 }
 
-int id = Integer.parseInt((String)request.getParameter("selected"));
+String id = (String)request.getParameter("selected");
 String Query = "select * FROM getBranch(?)";
 PreparedStatement pstmt = null;
 Connection con=null;
@@ -33,7 +33,7 @@ try {
 	url = "jdbc:postgresql://localhost:5432/casino?user=postgres&password=";
 	con = DriverManager.getConnection(url);
 	pstmt = con.prepareCall(Query);
-    pstmt.setInt(1, id);
+    pstmt.setString(1, id);
     rs = pstmt.executeQuery();
     if(!rs.next()){
     	response.sendRedirect("error.jsp");

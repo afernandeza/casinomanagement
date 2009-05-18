@@ -12,6 +12,7 @@ else{
 		response.sendRedirect("../login.jsp");
 	}
 }
+String error = (String)request.getParameter("error");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -77,7 +78,10 @@ else{
 			<div class="post">
 				<h1 class="title">P&aacute;gina de error.</h1>
 				<div class="entry">
-					<p>Ha habido un error inesperado procesando su solicitud, vuelva a intentarlo.</p>
+					<p>Ha habido un error procesando su solicitud.</p>
+					<%
+						out.println("<p>"+error+"</p>");
+					%>
 				</div>
 			</div>
 		</div>

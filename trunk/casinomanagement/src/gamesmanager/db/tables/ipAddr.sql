@@ -5,7 +5,7 @@
 CREATE TABLE ipAddr
 (
   IPid integer NOT NULL,
-  sucursalid integer NOT NULL,
+  sucursalid character varying(100) NOT NULL,
   ip character varying(100) NOT NULL,
   CONSTRAINT ipAddr_pkey PRIMARY KEY (IPid),
   CONSTRAINT ipAddr_sucursalid_fkey FOREIGN KEY (sucursalid)

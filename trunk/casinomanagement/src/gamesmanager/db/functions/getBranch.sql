@@ -1,8 +1,8 @@
--- Function: getBranch(integer)
+-- Function: getBranch(character varying)
 
--- DROP FUNCTION getBranch(integer);
+-- DROP FUNCTION getBranch(character varying);
 
-CREATE OR REPLACE FUNCTION getBranch(sid integer)
+CREATE OR REPLACE FUNCTION getBranch(sid character varying)
   RETURNS sucursal_view AS
 $BODY$
   SELECT * 
@@ -11,4 +11,4 @@ $BODY$
 $BODY$
   LANGUAGE 'sql' VOLATILE
   COST 100;
-ALTER FUNCTION getBranch(integer) OWNER TO casinomngmtapp;
+ALTER FUNCTION getBranch(character varying) OWNER TO casinomngmtapp;
