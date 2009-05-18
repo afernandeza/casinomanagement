@@ -1,4 +1,3 @@
-<%@ page import = "java.sql.*;"%>
 <%
 session = request.getSession(false);
 if (session==null){
@@ -13,11 +12,6 @@ else{
 		response.sendRedirect("../login.jsp");
 	}
 }
-
-String query=null;
-Connection con=null;
-ResultSet rs=null;
-String url=null;
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -86,43 +80,41 @@ String url=null;
 		<!-- start content -->
 		<div id="content">
 			<div class="post">
+				<h1 class="title">Nuevo administrador</h1>
 				<div class="entry">
-					<h2>Cambiar direccion IP de una sucursal</h2>
-				    <p>Elija una sucursal: </p>
-				    <FORM NAME="opciones" action="IPedit.jsp" method="post">
-				      <p>Elegir Sucursal: 
-				      <select name="sucursales">
-						<%
-					      	query="SELECT * FROM sucursales;";
-							con=null;
-							rs=null;
-							try {
-								Class.forName("org.postgresql.Driver").newInstance();
-								url = "jdbc:postgresql://localhost:5432/casino?user=postgres&password=";
-								con = DriverManager.getConnection(url);
-								rs=  con.createStatement().executeQuery(query);
-								String id,nombre;
-								while (rs.next()){
-									id = rs.getString("sucursalid");
-									nombre = rs.getString("nombre");
-									out.println("<option value=\""+id+"\">"+nombre+"</option>");
-								}
-							}
-							catch (Exception e){e.printStackTrace();}
-							finally{
-								if (rs!=null){rs.close();}
-								if (con!=null){con.close();}
-							}
-						  %>
-				      </select>
-				      </p>
-				      <input type="submit" name="submit" value="Continuar"></input>
-					</FORM>
-				
-					<DIV ID="testdiv1" STYLE="position:absolute;visibility:hidden;background-color:white;layer-background-color:white;"></DIV>
+					<form action="newAdmin.jsp" method="post">
+					<table border="0">
+					  <tr>
+					    <td>Nombre(s):</td>
+					    <td><input type="text" name="name" id="name"></td>
+					  </tr>
+					  <tr>
+					    <td>Apellido Paterno:</td>
+					    <td><input type="text" name="pat" id="pat"></td>
+					  </tr>
+					  <tr>
+					    <td>Apellido Materno:</td>
+					    <td><input type="text" name="mat" id="mat"></td>
+					  </tr>
+					  <tr>
+					    <td>Usuario:</td>
+					    <td><input type="text" name="user" id="user"></td>
+					  </tr>
+					    <tr>
+					    <td>Contrase&ntilde;a:</td>
+					    <td><input type="password" name="pass" id="pass"></td>
+					  </tr>
+					  <tr>
+					    <td>Repita contrase&ntilde;a:</td>
+					    <td><input type="password" name="pass2" id="pass2"></td>
+					  </tr>
+					  <td colspan="2" class="left"><input name="newbranch" type="submit" value="Agregar administrador"></td>
+					  </tr>
+					</table>
+					</form>
 				</div>
 			</div>
-		</div>
+			</div>
 		<!-- end content -->
 				<div style="clear: both;">&nbsp;</div>
 	</div>

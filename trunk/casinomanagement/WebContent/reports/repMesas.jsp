@@ -7,15 +7,10 @@ page import="java.io.*,
 %><%
 
 String sucursal = request.getParameter("sucursales");
-String date1 = request.getParameter("date1");
-String date2 = request.getParameter("date2");
 String ipaddr="";
 String errorMSG="";
 boolean error = false;
-
 if (sucursal==null || sucursal.equals("")){ error = true; }
-if (date1==null || date1.equals("")){ error = true; }
-if (date2==null || date2.equals("")){ error = true; }
 
 
 String query="SELECT ip FROM ipaddr WHERE sucursalid = '"+sucursal+"'";
@@ -61,14 +56,24 @@ if (!error){
 	
 	document.add(table);
 	
-	document.add(new Paragraph("Reporte de ganancias para la sucursal: "+ sucursal+"\n"));
+	document.add(new Paragraph("Reporte de ganancias de mesas: "+ sucursal+"\n"));
 	document.add(new Paragraph("\n"));
-	document.add(new Paragraph("Total de ganancias de la fecha: "+ date1+" al "+date2+":", FontFactory.getFont(FontFactory.HELVETICA, 14)));
-
+	PdfPTable table2 = new PdfPTable(3);
+	table2.getDefaultCell().setBorderWidth(1);
+	PdfPCell cell;
+	cell = new PdfPCell(new Paragraph("ID de mesa", FontFactory.getFont(FontFactory.HELVETICA, 14)));
+	cell.setGrayFill(0.75f);
+	table2.addCell(cell);
+	cell = new PdfPCell(new Paragraph("Tipo de Juego", FontFactory.getFont(FontFactory.HELVETICA, 14)));
+	cell.setGrayFill(0.75f);
+	table2.addCell(cell);
+	cell = new PdfPCell(new Paragraph("Ganancias generadas", FontFactory.getFont(FontFactory.HELVETICA, 14)));
+	cell.setGrayFill(0.75f);
+	table2.addCell(cell);
 
 	
 	
-	query="SELECT * FROM repsesiones('"+date1+"', '"+date2+"')";
+	query="SELECT * FROM repmesas";
 	Connection con2=null;
 	ResultSet rs2=null;
 	try {
@@ -77,7 +82,9 @@ if (!error){
 		con2 = DriverManager.getConnection(url);
 		rs2=  con2.createStatement().executeQuery(query);
 		while (rs2.next()){
-			document.add(new Paragraph("$"+String.valueOf(rs2.getInt(1)), FontFactory.getFont(FontFactory.HELVETICA, 14)));
+			table2.addCell(new Paragraph(rs2.getString(1)));
+			table2.addCell(new Paragraph(rs2.getString(2)));
+			table2.addCell(new Paragraph(String.valueOf(rs2.getInt(3))));
 		}
 	}
 	catch (Exception e){e.printStackTrace();}
@@ -85,6 +92,9 @@ if (!error){
 		if (rs2!=null){rs2.close();}
 		if (con2!=null){con2.close();}
 	}
+	
+	
+	document.add(table2);
 	document.close();
 	
 	DataOutput output = new DataOutputStream( response.getOutputStream() );
