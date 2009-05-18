@@ -110,17 +110,7 @@ String url=null;
 							}
 						  %>
 				      </select>
-				      </p>
-				      <p> Fecha de inicio para el reporte: 
-				      <INPUT TYPE="text" NAME="date1" VALUE="" SIZE=25 readonly="readonly"></INPUT>
-				
-				      <A HREF="#" onClick="cal.select(document.forms['opciones'].date1,'anchor1','MM/dd/yyyy'); return false;" NAME="anchor1" ID="anchor1"><img src="calendar.png" border="0" height="30" weight="30"></A>
-				      </p>
-				
-				      <p> Fecha de t&eacute;rmino para el reporte: 
-				      <INPUT TYPE="text" NAME="date2" VALUE="" SIZE=25 readonly="readonly"></INPUT>
-				      <A HREF="#" onClick="cal.select(document.forms['opciones'].date2,'anchor2','MM/dd/yyyy'); return false;" NAME="anchor1" ID="anchor2"><img src="calendar.png" border="0" height="30" weight="30"></A>
-				      </p>
+				      </p>				      
 				      <input type="submit" name="submit" value="Generar Reporte"></input>
 					</FORM>
 				

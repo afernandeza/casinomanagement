@@ -22,16 +22,13 @@ String CP = (String)request.getParameter("CP");
 String municipio = (String)request.getParameter("municipio");
 String estado = (String)request.getParameter("estado");
 String pais = (String)request.getParameter("country");
-
+String id = (String)request.getParameter("id");
 boolean error = false;
-int id=-1;
-try {
-	id = Integer.parseInt((String)request.getParameter("id"));
-}catch(Exception numEx){numEx.printStackTrace(); error=true;}
-finally { if (error){response.sendRedirect("error.jsp");} }
 
 
-if (id==-1){error=true;}
+
+
+if (id==null || id.equals("")){error=true;}
 if (name==null || name.equals("")){error=true;}
 if (street==null || street.equals("")){error=true;}
 if (numint==null || numint.equals("")){error=true;}
@@ -53,7 +50,7 @@ if (!error){
 		String INSERT = "{? = call updateBranch(?, ?, ?, ?, ?, ?, ?, ?,?)}";
 		cs = con.prepareCall(INSERT);
 	    cs.registerOutParameter(1, Types.BOOLEAN);
-	    cs.setInt(2, id);
+	    cs.setString(2, id);
 	    cs.setString(3, name);
 	    cs.setString(4, street);
 	    cs.setString(5, numint);

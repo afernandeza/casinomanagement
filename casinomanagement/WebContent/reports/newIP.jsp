@@ -15,18 +15,12 @@ else{
 }
 
 String ip = (String)request.getParameter("ip");
-
+String id = (String)request.getParameter("id");
 
 
 boolean error = false;
 
-int id=-1;
-try {
-	id = Integer.parseInt((String)request.getParameter("id"));
-}catch(Exception numEx){numEx.printStackTrace(); error=true;}
-finally { if (error){response.sendRedirect("error.jsp");} }
-
-if (id==-1){error=true;}
+if (id==null || id.equals("")){error = true;}
 if (ip==null || ip.equals("")){error = true;}
 
 
@@ -43,7 +37,7 @@ if (!error){
 		String INSERT = "{? = call insertIP(?, ?)}";
 		cs = con.prepareCall(INSERT);
 	    cs.registerOutParameter(1, Types.BOOLEAN);
-	    cs.setInt(2, id);
+	    cs.setString(2, id);
 	    cs.setString(3, ip);
 	    cs.execute();
 	    success = cs.getBoolean(1);

@@ -1,8 +1,8 @@
--- Function: updateBranch(integer, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying)
+-- Function: updateBranch(character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying)
 
--- DROP FUNCTION updateBranch(integer, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying);
+-- DROP FUNCTION updateBranch(character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying);
 
-CREATE OR REPLACE FUNCTION updateBranch(sid integer, name character varying, street character varying, num character varying, col character varying, muni character varying, cp character varying, state character varying, country character varying)
+CREATE OR REPLACE FUNCTION updateBranch(sid character varying, name character varying, street character varying, num character varying, col character varying, muni character varying, cp character varying, state character varying, country character varying)
   RETURNS boolean AS
 $BODY$
 declare
@@ -26,4 +26,4 @@ end;
 $BODY$
   LANGUAGE 'plpgsql' VOLATILE
   COST 100;
-ALTER FUNCTION updateBranch(integer, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying) OWNER TO casinomngmtapp;
+ALTER FUNCTION updateBranch(character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying) OWNER TO casinomngmtapp;

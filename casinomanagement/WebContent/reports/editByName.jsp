@@ -98,7 +98,7 @@ else{
 					        pstmt.setString(1, "%"+nombre+"%");
 					        rs = pstmt.executeQuery();
 					        while (rs.next()){
-					        	out.println("<tr><td> <input type=\"radio\" name=\"selected\" value=\""+rs.getInt("sucursalid")+"\"></td>");
+					        	out.println("<tr><td> <input type=\"radio\" name=\"selected\" value=\""+rs.getString("sucursalid")+"\"></td>");
 					        	out.println("<td>"+rs.getString("nombre")+"</td>");
 					        	out.println("<td>"+rs.getString("callenum")+" "+rs.getString("colonia")+" "+rs.getString("codigopostal")+
 					        				"<br>"+rs.getString("municipio")+", "+rs.getString("estado")+", "+rs.getString("pais")+"</td></tr>");

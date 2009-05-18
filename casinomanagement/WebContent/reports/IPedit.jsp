@@ -14,7 +14,7 @@ else{
 	}
 }
 
-int id = Integer.parseInt((String)request.getParameter("sucursales"));
+String id = (String)request.getParameter("sucursales");
 
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -99,7 +99,7 @@ int id = Integer.parseInt((String)request.getParameter("sucursales"));
 							String url = "jdbc:postgresql://localhost:5432/casino?user=postgres&password=";
 							con = DriverManager.getConnection(url);
 							pstmt = con.prepareCall(Query);
-					        pstmt.setInt(1, id);
+					        pstmt.setString(1, id);
 					        rs = pstmt.executeQuery();
 					        cont=1;
 					        while (rs.next()){

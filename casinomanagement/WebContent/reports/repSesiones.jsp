@@ -7,10 +7,15 @@ page import="java.io.*,
 %><%
 
 String sucursal = request.getParameter("sucursales");
+String date1 = request.getParameter("date1");
+String date2 = request.getParameter("date2");
 String ipaddr="";
 String errorMSG="";
 boolean error = false;
+
 if (sucursal==null || sucursal.equals("")){ error = true; }
+if (date1==null || date1.equals("")){ error = true; }
+if (date2==null || date2.equals("")){ error = true; }
 
 
 String query="SELECT ip FROM ipaddr WHERE sucursalid = '"+sucursal+"'";
@@ -60,20 +65,11 @@ if (!error){
 	document.add(new Paragraph("\n"));
 	PdfPTable table2 = new PdfPTable(3);
 	table2.getDefaultCell().setBorderWidth(1);
-	PdfPCell cell;
-	cell = new PdfPCell(new Paragraph("Nombre Completo", FontFactory.getFont(FontFactory.HELVETICA, 14)));
-	cell.setGrayFill(0.75f);
-	table2.addCell(cell);
-	cell = new PdfPCell(new Paragraph("Fecha de Registro", FontFactory.getFont(FontFactory.HELVETICA, 14)));
-	cell.setGrayFill(0.75f);
-	table2.addCell(cell);
-	cell = new PdfPCell(new Paragraph("Credito Actual", FontFactory.getFont(FontFactory.HELVETICA, 14)));
-	cell.setGrayFill(0.75f);
-	table2.addCell(cell);
+	table2.addCell(new Paragraph("Nombre Completo"));
 
 	
 	
-	query="SELECT * FROM repclientes";
+	query="SELECT * FROM repsesiones('"+date1+"', '"+date2+"')";
 	Connection con2=null;
 	ResultSet rs2=null;
 	try {
@@ -82,9 +78,7 @@ if (!error){
 		con2 = DriverManager.getConnection(url);
 		rs2=  con2.createStatement().executeQuery(query);
 		while (rs2.next()){
-			table2.addCell(new Paragraph(rs2.getString(2)+" " +rs2.getString(3)+" "+rs2.getString(1)));
-			table2.addCell(new Paragraph(rs2.getString(4)));
-			table2.addCell(new Paragraph(String.valueOf(rs2.getInt(5))));
+			table2.addCell(new Paragraph(rs2.getString(2)));
 		}
 	}
 	catch (Exception e){e.printStackTrace();}

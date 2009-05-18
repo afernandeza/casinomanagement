@@ -3,7 +3,7 @@ page import="java.io.*,
 			 java.awt.Color,
 			 com.lowagie.text.*,
 			 com.lowagie.text.pdf.*,
-			 "
+			 java.sql.*;"
 %><%
 
 String sucursal = request.getParameter("sucursales");
@@ -38,12 +38,34 @@ if (!error){
 	document.add(new Paragraph("Reporte de clientes para la sucursal: "+ sucursal +"\nPeriodo entre:" + date1 + " y " + date2+"\n\n"));
 	PdfPTable table2 = new PdfPTable(3);
 	table2.getDefaultCell().setBorderWidth(1);
-	table2.addCell(new Paragraph("Cliente"));
-	table2.addCell(new Paragraph("Fecha de Actividad"));
-	table2.addCell(new Paragraph("Sucursal"));
-	table2.addCell(new Paragraph("Maria Perez"));
-	table2.addCell(new Paragraph("04/23/2009"));
-	table2.addCell(new Paragraph("prueba"));
+	table2.addCell(new Paragraph("ID"));
+	table2.addCell(new Paragraph("Nombre"));
+	table2.addCell(new Paragraph("Cantidad"));
+	
+	
+	String query="SELECT * FROM repempleados";
+	Connection con=null;
+	ResultSet rs=null;
+	try {
+		Class.forName("org.postgresql.Driver").newInstance();
+		String url = "jdbc:postgresql://10.0.1.58:5432/casinolocal?user=casinomngmtapp&password=casinomngmtapp";
+		con = DriverManager.getConnection(url);
+		rs=  con.createStatement().executeQuery(query);
+		String nombre, fecha_reg;
+		int credito;
+		while (rs.next()){
+			table2.addCell(new Paragraph(rs.getString(1)));
+			table2.addCell(new Paragraph(rs.getString(2)+" " +rs.getString(3)+" "+rs.getString(4)));
+			table2.addCell(new Paragraph(String.valueOf(rs.getInt(5))));
+		}
+	}
+	catch (Exception e){e.printStackTrace();}
+	finally{
+		if (rs!=null){rs.close();}
+		if (con!=null){con.close();}
+	}
+	
+	
 	document.add(table2);
 	document.close();
 	

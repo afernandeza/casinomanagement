@@ -14,13 +14,9 @@ else{
 	}
 }
 boolean error = false;
-int id=-1;
-try {
-	id = Integer.parseInt((String)request.getParameter("selected"));
-}catch(Exception numEx){numEx.printStackTrace(); error=true;}
-finally { if(error){response.sendRedirect("error.jsp");} }
+String id = (String)request.getParameter("selected");
 
-if (id ==-1){ error = true; }
+if (id==null || id.equals("")){error = true;}
 
 if (!error) {
 	CallableStatement cs=null;
@@ -34,7 +30,7 @@ if (!error) {
 		String INSERT = "{? = call deleteBranch(?)}";
 		cs = con.prepareCall(INSERT);
 	    cs.registerOutParameter(1, Types.BOOLEAN);
-	    cs.setInt(2, id);
+	    cs.setString(2, id);
 	    cs.execute();
 	    success = cs.getBoolean(1);
 	}

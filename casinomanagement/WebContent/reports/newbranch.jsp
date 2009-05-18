@@ -80,6 +80,10 @@ else{
 					<form action="newbranchprocess.jsp" method="post">
 					<table border="0">
 					  <tr>
+					    <td>ID de sucursal:</td>
+					    <td><input type="text" name="branchID" id="branchID"></td>
+					  </tr>
+					  <tr>
 					    <td>Nombre de sucursal:</td>
 					    <td><input type="text" name="branchname" id="branchname"></td>
 					  </tr>

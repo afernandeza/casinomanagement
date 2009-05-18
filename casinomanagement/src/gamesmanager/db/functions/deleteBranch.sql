@@ -1,8 +1,8 @@
--- Function: deleteBranch(integer)
+-- Function: deleteBranch(character varying)
 
--- DROP FUNCTION deleteBranch(integer);
+-- DROP FUNCTION deleteBranch(character varying);
 
-CREATE OR REPLACE FUNCTION deleteBranch(id integer)
+CREATE OR REPLACE FUNCTION deleteBranch(id character varying)
   RETURNS boolean AS
 $BODY$
 declare
@@ -17,4 +17,4 @@ end;
 $BODY$
   LANGUAGE 'plpgsql' VOLATILE
   COST 100;
-ALTER FUNCTION deleteBranch(integer) OWNER TO casinomngmtapp;
+ALTER FUNCTION deleteBranch(character varying) OWNER TO casinomngmtapp;
