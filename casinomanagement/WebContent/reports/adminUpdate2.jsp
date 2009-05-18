@@ -14,10 +14,9 @@ else{
 	}
 }
 
-String query=null;
-Connection con=null;
-ResultSet rs=null;
-String url=null;
+int id = Integer.parseInt((String)request.getParameter("selected"));
+
+
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -86,43 +85,29 @@ String url=null;
 		<!-- start content -->
 		<div id="content">
 			<div class="post">
+				<h1 class="title">Editar sucursal</h1>
 				<div class="entry">
-					<h2>Cambiar direccion IP de una sucursal</h2>
-				    <p>Elija una sucursal: </p>
-				    <FORM NAME="opciones" action="IPedit.jsp" method="post">
-				      <p>Elegir Sucursal: 
-				      <select name="sucursales">
-						<%
-					      	query="SELECT * FROM sucursales;";
-							con=null;
-							rs=null;
-							try {
-								Class.forName("org.postgresql.Driver").newInstance();
-								url = "jdbc:postgresql://localhost:5432/casino?user=postgres&password=";
-								con = DriverManager.getConnection(url);
-								rs=  con.createStatement().executeQuery(query);
-								String id,nombre;
-								while (rs.next()){
-									id = rs.getString("sucursalid");
-									nombre = rs.getString("nombre");
-									out.println("<option value=\""+id+"\">"+nombre+"</option>");
-								}
-							}
-							catch (Exception e){e.printStackTrace();}
-							finally{
-								if (rs!=null){rs.close();}
-								if (con!=null){con.close();}
-							}
-						  %>
-				      </select>
-				      </p>
-				      <input type="submit" name="submit" value="Continuar"></input>
-					</FORM>
-				
-					<DIV ID="testdiv1" STYLE="position:absolute;visibility:hidden;background-color:white;layer-background-color:white;"></DIV>
+					<form action="updateAdmin.jsp" method="post">
+					<table border="0">
+					  <tr>
+					    <td>Contrase&ntilde;a:</td>
+					    <td><input type="password" name="pass" id="pass" /></td>
+					  </tr>
+					   <tr>
+					    <td>Repita Contrase&ntilde;a:</td>
+					    <td><input type="password" name="pass2" id="pass2" /></td>
+					    <input type="hidden" name="id" value="<%out.print(id);%>" />
+					  </tr>
+					  
+					  <tr>
+					  <td colspan="2" class="left"><input name="newIP" type="submit" value="Continuar"></td>
+					  </tr>
+					</table>
+					<input type="hidden" name="id" value="<%out.print(id);%>"/>
+					</form>
 				</div>
 			</div>
-		</div>
+			</div>
 		<!-- end content -->
 				<div style="clear: both;">&nbsp;</div>
 	</div>

@@ -7,12 +7,33 @@ page import="java.io.*,
 %><%
 
 String sucursal = request.getParameter("sucursales");
-String date1 = request.getParameter("date1");
-String date2 = request.getParameter("date2");
+String ipaddr="";
+String errorMSG="";
 boolean error = false;
 if (sucursal==null || sucursal.equals("")){ error = true; }
-if (date1==null || date1.equals("")){ error = true; }
-if (date2==null || date2.equals("")){ error = true; }
+
+
+String query="SELECT ip FROM ipaddr WHERE sucursalid = '"+sucursal+"'";
+Connection con=null;
+ResultSet rs=null;
+try {
+	Class.forName("org.postgresql.Driver").newInstance();
+	String url = "jdbc:postgresql://localhost:5432/casino?user=postgres&password=";
+	con = DriverManager.getConnection(url);
+	rs=  con.createStatement().executeQuery(query);
+	if (rs.next()){
+		ipaddr=rs.getString("ip");
+	}
+	else{
+		error=true;
+		errorMSG += "No hay direccion ip para la sucursal";
+	}
+}
+catch (Exception e){e.printStackTrace(); error=true;}
+finally{
+	if (rs!=null){rs.close();}
+	if (con!=null){con.close();}
+}
 
 if (!error){
 	response.setContentType( "application/pdf" );
@@ -35,34 +56,41 @@ if (!error){
 	
 	document.add(table);
 	
-	document.add(new Paragraph("Reporte de clientes para la sucursal: "+ sucursal +"\nPeriodo entre:" + date1 + " y " + date2+"\n\n"));
+	document.add(new Paragraph("Reporte de empleados para la sucursal: "+ sucursal +"\n\n"));
+	document.add(new Paragraph("\n"));
 	PdfPTable table2 = new PdfPTable(3);
 	table2.getDefaultCell().setBorderWidth(1);
-	table2.addCell(new Paragraph("ID"));
-	table2.addCell(new Paragraph("Nombre"));
-	table2.addCell(new Paragraph("Cantidad"));
+	PdfPCell cell;
+	cell = new PdfPCell(new Paragraph("ID empleado", FontFactory.getFont(FontFactory.HELVETICA, 14)));
+	cell.setGrayFill(0.75f);
+	table2.addCell(cell);
+	cell = new PdfPCell(new Paragraph("Nombre Completo", FontFactory.getFont(FontFactory.HELVETICA, 14)));
+	cell.setGrayFill(0.75f);
+	table2.addCell(cell);
+	cell = new PdfPCell(new Paragraph("Ganancias Generadas", FontFactory.getFont(FontFactory.HELVETICA, 14)));
+	cell.setGrayFill(0.75f);
+	table2.addCell(cell);
+
 	
 	
-	String query="SELECT * FROM repempleados";
-	Connection con=null;
-	ResultSet rs=null;
+	query="SELECT * FROM repempleados";
+	Connection con2=null;
+	ResultSet rs2=null;
 	try {
 		Class.forName("org.postgresql.Driver").newInstance();
-		String url = "jdbc:postgresql://10.0.1.58:5432/casinolocal?user=casinomngmtapp&password=casinomngmtapp";
-		con = DriverManager.getConnection(url);
-		rs=  con.createStatement().executeQuery(query);
-		String nombre, fecha_reg;
-		int credito;
-		while (rs.next()){
-			table2.addCell(new Paragraph(rs.getString(1)));
-			table2.addCell(new Paragraph(rs.getString(2)+" " +rs.getString(3)+" "+rs.getString(4)));
-			table2.addCell(new Paragraph(String.valueOf(rs.getInt(5))));
+		String url = "jdbc:postgresql://"+ipaddr+":5432/casinolocal?user=casinomngmtapp&password=casinomngmtapp";
+		con2 = DriverManager.getConnection(url);
+		rs2=  con2.createStatement().executeQuery(query);
+		while (rs2.next()){
+			table2.addCell(new Paragraph(rs2.getString(1)));
+			table2.addCell(new Paragraph(rs2.getString(2)+" "+rs2.getString(3)+" "+rs2.getString(4)));
+			table2.addCell(new Paragraph(String.valueOf(rs2.getInt(5))));
 		}
 	}
 	catch (Exception e){e.printStackTrace();}
 	finally{
-		if (rs!=null){rs.close();}
-		if (con!=null){con.close();}
+		if (rs2!=null){rs2.close();}
+		if (con2!=null){con2.close();}
 	}
 	
 	
@@ -75,6 +103,6 @@ if (!error){
 	for( int i = 0; i < bytes.length; i++ ) { output.writeByte( bytes[i] ); }
 }
 else {
-	response.sendRedirect("error.jsp");
+	response.sendRedirect("error.jsp?error="+errorMSG);
 }
 %>

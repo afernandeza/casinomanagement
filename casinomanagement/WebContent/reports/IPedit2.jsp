@@ -83,20 +83,25 @@ finally{
 						<li><a href="addIP.jsp">Agregar direccion IP</a></li>
 						<li><a href="editIP.jsp">Editar direccion IP</a></li>
 						<li><a href="deleteIP.jsp">Borrar direccion IP</a></li>
+						<li><a href="adminAdd.jsp">Agregar Administrador</a></li>
+						<li><a href="adminUpdate.jsp">Editar Contrase&ntilde;a de Administrador</a></li>
+						<li><a href="adminDelete.jsp">Borrar Administrador</a></li>
 					</ul>
 				</li>
 				<li>
 					<h2>Reportes</h2>
 					<ul>
-						<li><a href="clientstats.jsp">Actividad de clientes por sucursal</a></li>
-						<li><a href="gamesperemployee.jsp">Resultado de mesas de juego por empleado</a></li>
-						<li><a href="branchresults.jsp">Resultados a nivel sucursal</a></li>
-						<li><a href="totalresults.jsp">Resultados a nivel cadena</a></li>
+						<li><a href="clientstats.jsp">Clientes por sucursal</a></li>
+						<li><a href="mesasInfo.jsp">Informaci&oacute;n de Mesas de juego</a></li>
+						<li><a href="gamesperemployee.jsp">Ganancias de Mesas</a></li>
+						<li><a href="branchemployees.jsp">Empleados por sucursal</a></li>
+						<li><a href="branchresults.jsp">Ganancias a nivel sucursal</a></li>
 					</ul>
 				</li>
 				<li>
 					<h2>Opciones de usuario</h2>
 					<ul>
+						<li><a href="sync.jsp">Sincronizar usuarios</a></li>
 						<li><a href="logout.jsp">Cerrar Sesi&oacute;n</a></li>
 					</ul>
 				</li>

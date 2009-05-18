@@ -87,9 +87,9 @@ String url=null;
 		<div id="content">
 			<div class="post">
 				<div class="entry">
-					<h2>Cambiar direccion IP de una sucursal</h2>
-				    <p>Elija una sucursal: </p>
-				    <FORM NAME="opciones" action="IPedit.jsp" method="post">
+					<h2>Informacion de mesas por sucursal</h2>
+				    <p>Elija las siguientes opciones para generar el reporte: </p>
+				    <FORM NAME="opciones" action="repMesasInfo.jsp" method="post">
 				      <p>Elegir Sucursal: 
 				      <select name="sucursales">
 						<%
@@ -115,8 +115,8 @@ String url=null;
 							}
 						  %>
 				      </select>
-				      </p>
-				      <input type="submit" name="submit" value="Continuar"></input>
+				      </p>				      
+				      <input type="submit" name="submit" value="Generar Reporte"></input>
 					</FORM>
 				
 					<DIV ID="testdiv1" STYLE="position:absolute;visibility:hidden;background-color:white;layer-background-color:white;"></DIV>

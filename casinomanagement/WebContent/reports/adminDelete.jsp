@@ -13,11 +13,6 @@ else{
 		response.sendRedirect("../login.jsp");
 	}
 }
-
-String query=null;
-Connection con=null;
-ResultSet rs=null;
-String url=null;
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -25,11 +20,6 @@ String url=null;
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>RGMS - Reports</title>
     <SCRIPT LANGUAGE="JavaScript" SRC="calendar.js"></SCRIPT>
-    <SCRIPT LANGUAGE="JavaScript">
-		var cal = new CalendarPopup("testdiv1");
-		cal.showNavigationDropdowns();
-    </SCRIPT>
-    <SCRIPT LANGUAGE="JavaScript">document.write(getCalendarStyles());</SCRIPT>
 <link href="../styles/mainstyles.css" rel="stylesheet" type="text/css" media="screen" />
 </head>
 <body>
@@ -86,43 +76,43 @@ String url=null;
 		<!-- start content -->
 		<div id="content">
 			<div class="post">
+				<h1 class="title">Editar sucursal.</h1>
 				<div class="entry">
-					<h2>Cambiar direccion IP de una sucursal</h2>
-				    <p>Elija una sucursal: </p>
-				    <FORM NAME="opciones" action="IPedit.jsp" method="post">
-				      <p>Elegir Sucursal: 
-				      <select name="sucursales">
-						<%
-					      	query="SELECT * FROM sucursales;";
-							con=null;
-							rs=null;
-							try {
-								Class.forName("org.postgresql.Driver").newInstance();
-								url = "jdbc:postgresql://localhost:5432/casino?user=postgres&password=";
-								con = DriverManager.getConnection(url);
-								rs=  con.createStatement().executeQuery(query);
-								String id,nombre;
-								while (rs.next()){
-									id = rs.getString("sucursalid");
-									nombre = rs.getString("nombre");
-									out.println("<option value=\""+id+"\">"+nombre+"</option>");
-								}
-							}
-							catch (Exception e){e.printStackTrace();}
-							finally{
-								if (rs!=null){rs.close();}
-								if (con!=null){con.close();}
-							}
-						  %>
-				      </select>
-				      </p>
-				      <input type="submit" name="submit" value="Continuar"></input>
-					</FORM>
-				
-					<DIV ID="testdiv1" STYLE="position:absolute;visibility:hidden;background-color:white;layer-background-color:white;"></DIV>
+					Seleccione una regi&oacute;n en donde se buscar&aacute;n sucursales:
+					<br><br>
+					<form name="form1" method="post" action="deleteAdmin.jsp">
+					<table border="1">
+					  <tr>
+					    <td>&nbsp;</td>
+					    <td><b>Nombre Usuario</b></td>
+					  </tr>
+					  <%
+					  String Query = "select * FROM adminuser WHERE sync != 'b' AND usuario !='admin'";
+						Connection con=null;
+						ResultSet rs = null;
+						int cont=0;
+						try {
+							Class.forName("org.postgresql.Driver").newInstance();
+							String url = "jdbc:postgresql://localhost:5432/casino?user=postgres&password=";
+							con = DriverManager.getConnection(url);
+					        rs=  con.createStatement().executeQuery(Query);
+					        while (rs.next()){
+					        	out.println("<tr><td> <input type=\"radio\" name=\"selected\" value=\""+rs.getString("usuarioid")+"\"></td>");
+					        	out.println("<td>"+rs.getString("usuario")+"</td></tr>");
+					        }
+						}
+						catch (Exception e){e.printStackTrace();}
+						finally{
+							if (con!=null){con.close();}
+							if (rs!=null){rs.close();}
+						}
+						%>
+					</table>
+					<input name="continue" type="submit" value="Continuar">
+					</form>
 				</div>
 			</div>
-		</div>
+			</div>
 		<!-- end content -->
 				<div style="clear: both;">&nbsp;</div>
 	</div>
@@ -133,3 +123,4 @@ String url=null;
 </div>
 </body>
 </html>
+			
