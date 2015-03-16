@@ -1,0 +1,1 @@
+A web-based management system for a casino chain.
